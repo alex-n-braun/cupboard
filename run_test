@@ -1,0 +1,4 @@
+#!/bin/bash
+
+povray mdrink.pov +Q11 +A +WT64 Initial_Frame=1 Final_Frame=1 Initial_Clock=1 Final_Clock=1
+

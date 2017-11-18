@@ -2,7 +2,11 @@
 
 rm ./tmp/*.png
 
-povray desk.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=150 Initial_Clock=0 Final_Clock=5 Output_File_Name=./tmp/
+#1 
+#povray desk.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=450 Initial_Clock=0 Final_Clock=15 Output_File_Name=./tmp/
+
+#2
+povray desk.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=450 Initial_Clock=0 Final_Clock=15 Output_File_Name=./tmp/
 
 rm ./tmp/output.mp4
 ffmpeg -framerate 30 -i ./tmp/desk%03d.png ./tmp/output.mp4
