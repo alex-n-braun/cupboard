@@ -238,7 +238,7 @@ camera
 //   location  straightRotate(<0.15, 0.30+0.03*clock_,0.675>-<0.3, 0.0, 0.0>, <0.15, 0.45,0.675>, y*(-30+3.5*clock_))
 //   look_at   <0.15, 0.45,0.675>
 // von vorne 
-  location  <0.075, 0.8, 1.4>
+  location  <0.075, 0.5, 1.4>
   look_at   <0.25, 0.3,0.6>
 //  location  <0.8, 1.82, 1.8>
 // von hinten
@@ -701,7 +701,15 @@ light_source{x*100 color White
         object{Sides rotate z*90 translate <thkSide, (footHeight+thkTop), 0>}
         object{Sides rotate z*90 translate <wdth, (footHeight+thkTop), 0>}
         // Rueckwand
-        object{Board(wdth-2*thkSide, height-thkTop*2-footHeight, 0.001, 0.0004)             rotate x*90 translate <thkSide, height-thkTop, 0.003>}
+        object{
+            difference{
+                object{
+                    Board(wdth-2*thkSide, height-thkTop*2-footHeight, 0.001, 0.0004)            
+                    rotate x*90 translate <thkSide, height-thkTop, 0.003>
+                }
+                box{<0.04+thkSide,0.54,0>,<0.04+thkSide+0.1, 0.54+0.1, 0.006>}
+            }
+        }
         // Schreibschublade
         #local distBack = 0.07;
         #local depthDeskTop = depth-0.003-0.01-distBack;
@@ -722,7 +730,9 @@ light_source{x*100 color White
             }
         }
         // oberhalb...
-        object{DeskInside(height, wdth, depth, thkTop, edgeTop, thkSide, heightDeskFront, thkDesk, thk, footHeight, footRad) translate (heightDesk+0.01)*y}
+        difference{
+            object{DeskInside(height, wdth, depth, thkTop, edgeTop, thkSide, heightDeskFront, thkDesk, thk, footHeight, footRad) translate (heightDesk+0.01)*y}
+        }
         // Bildschirm
         object{
             object{
@@ -748,59 +758,58 @@ light_source{x*100 color White
         }
         // 3 Shubladen
         #local depthDrawers = depth-0.003-0.01;
-        object{
-            union{
-                Drawer(0.31, frontElementWidth, depthDrawers, thk, edgeTop, 0.24, frontElementWidth-(thkSide+0.005+0.5*thk+0.005), 0.015, <thkSide+0.005,0.01,0>, handlePull(drawer1))
-                #local bar = object{
-                    union{
-                        object{
-                            Round_Box(<-0.001,0.0,-0.5*thk>,<0.001,0.01,-(depthDrawers-0.01)>,0.0009,0)
-                            translate y*0.01
-                        }
-                        Round_Box(<-0.005,0.0,-(depthDrawers-0.01)>,<0.005,0.021,-(depthDrawers-0.012)>,0.0009,0)
-                    }
-                    texture { 
-                        pigment{ color rgb<1,1,1>*0.1
-                        }
-                        finish { 
-                            ambient 0.4 
-                            diffuse 0.6 
-                            reflection 0.04
-                        }
-                    }
-                };
-                object{
-                    bar
-                    translate y*0.25+x*(thkSide+0.005+0.015)
-                }
-                object{
-                    bar
-                    translate y*0.25+x*(thkSide+0.005+0.015+0.33)
-//                     translate x*(frontElementWidth-(thkSide+0.005+0.5*thk+0.005)-1.1*thk)
-                }
-                #for (id, 0, 9, 1)
-                    object{ 
-                        Register(mod(id,5))
-                        translate -z*(0.07+0.01*id)+y*(0.25+0.02)+x*(thkSide+0.005+0.015)
-                    }
-                #end
-            }
-            translate <0,footHeight+thkTop+spacng,depth>
-            translate z*drawerPull(drawer1) * depthDrawers
-            #warning concat("inner drawer width: ", str(frontElementWidth-(thkSide+0.005+0.5*thk+0.005+2*0.015), 5, 4))
-        }
-        #local lo_drawer_height = (heightDesk - (heightDeskFront + 4*spacng+footHeight+thkTop+0.31))/2;
-        #warning concat("upper two drawer's height: ", str(lo_drawer_height, 5, 4))
-        object{
-            Drawer(lo_drawer_height, frontElementWidth, depth-0.003-0.01, thk, edgeTop, lo_drawer_height-0.02, frontElementWidth-(thkSide+0.005+0.5*thk+0.005), 0.015, <thkSide+0.005,0.01,0>, handlePull(drawer2))
-            translate <0,footHeight+thkTop+2*spacng+0.31,depth>
-            translate z*drawerPull(drawer2) * depthDrawers
-        }
-        object{
-            Drawer(lo_drawer_height, frontElementWidth, depth-0.003-0.01, thk, edgeTop, lo_drawer_height-0.02, frontElementWidth-(thkSide+0.005+0.5*thk+0.005), 0.015, <thkSide+0.005,0.01,0>, handlePull(drawer3))
-            translate <0,footHeight+thkTop+3*spacng+0.31+lo_drawer_height,depth>
-            translate z*drawerPull(drawer3) * depthDrawers            
-        }
+//         object{
+//             union{
+//                 Drawer(0.31, frontElementWidth, depthDrawers, thk, edgeTop, 0.24, frontElementWidth-(thkSide+0.005+0.5*thk+0.005), 0.015, <thkSide+0.005,0.01,0>, handlePull(drawer1))
+//                 #local bar = object{
+//                     union{
+//                         object{
+//                             Round_Box(<-0.001,0.0,-0.5*thk>,<0.001,0.01,-(depthDrawers-0.01)>,0.0009,0)
+//                             translate y*0.01
+//                         }
+//                         Round_Box(<-0.005,0.0,-(depthDrawers-0.01)>,<0.005,0.021,-(depthDrawers-0.012)>,0.0009,0)
+//                     }
+//                     texture { 
+//                         pigment{ color rgb<1,1,1>*0.1
+//                         }
+//                         finish { 
+//                             ambient 0.4 
+//                             diffuse 0.6 
+//                             reflection 0.04
+//                         }
+//                     }
+//                 };
+//                 object{
+//                     bar
+//                     translate y*0.25+x*(thkSide+0.005+0.015)
+//                 }
+//                 object{
+//                     bar
+//                     translate y*0.25+x*(thkSide+0.005+0.015+0.33)
+//                 }
+//                 #for (id, 0, 9, 1)
+//                     object{ 
+//                         Register(mod(id,5))
+//                         translate -z*(0.07+0.01*id)+y*(0.25+0.02)+x*(thkSide+0.005+0.015)
+//                     }
+//                 #end
+//             }
+//             translate <0,footHeight+thkTop+spacng,depth>
+//             translate z*drawerPull(drawer1) * depthDrawers
+//             #warning concat("inner drawer width: ", str(frontElementWidth-(thkSide+0.005+0.5*thk+0.005+2*0.015), 5, 4))
+//         }
+//         #local lo_drawer_height = (heightDesk - (heightDeskFront + 4*spacng+footHeight+thkTop+0.31))/2;
+//         #warning concat("upper two drawer's height: ", str(lo_drawer_height, 5, 4))
+//         object{
+//             Drawer(lo_drawer_height, frontElementWidth, depth-0.003-0.01, thk, edgeTop, lo_drawer_height-0.02, frontElementWidth-(thkSide+0.005+0.5*thk+0.005), 0.015, <thkSide+0.005,0.01,0>, handlePull(drawer2))
+//             translate <0,footHeight+thkTop+2*spacng+0.31,depth>
+//             translate z*drawerPull(drawer2) * depthDrawers
+//         }
+//         object{
+//             Drawer(lo_drawer_height, frontElementWidth, depth-0.003-0.01, thk, edgeTop, lo_drawer_height-0.02, frontElementWidth-(thkSide+0.005+0.5*thk+0.005), 0.015, <thkSide+0.005,0.01,0>, handlePull(drawer3))
+//             translate <0,footHeight+thkTop+3*spacng+0.31+lo_drawer_height,depth>
+//             translate z*drawerPull(drawer3) * depthDrawers            
+//         }
         
         // zwei Türen (unten)
         #local lowerDoorHeight = (heightDesk - (heightDeskFront + 2*spacng+footHeight+thkTop));
@@ -877,5 +886,8 @@ light_source{x*100 color White
              tDoorRight)
     }
 #end
+// #1
 //object{DeskInst1(min(0.5, 0.25*(clock-10)),0,0,min(0.5, 0.25*(clock-11)),min(0.5, 0.5*(clock-2)),min(0.5, 0.25*(clock-3)),min(0.5,0.25*(clock-7)),min(0.5, 0.25*(clock-8)))}
-object{DeskInst1(0.0,max(0.5,0.5+0.5*0.25*(clock_-9)),0.5,0,0.0,0.0,0.,0.)}
+// #2
+//object{DeskInst1(0.5,max(0.5,0.5+0.5*0.25*(clock_-9)),0.5,0,0.0,0.0,0.,0.)}
+object{DeskInst1(0,0,0,0,0.5,0.5,0,0)}
