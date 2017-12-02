@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+povray classchair.pov +Q11 +A
+

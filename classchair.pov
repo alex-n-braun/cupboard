@@ -304,7 +304,7 @@ global_settings{
 camera
 {
 //  location  <-16.0, 2.2, -12>
-  location  <0,1,0>
+  location  <-4,1,-2>
   direction 5*z
   right     4/3*x
   look_at   <-0.02, 0.7, 2.7>
@@ -400,7 +400,6 @@ object{Board(1.16,0.4795,0.024,0.002) rotate z*0 rotate y*90 translate x*-0.4895
 //schreibschublade
 object{Board(1.12,0.4095,0.024,0.0002) rotate z*0 rotate y*90 translate x*(-0.4895-0.10)+y*(0.73-0.029)+z*2.76}
 object{Board(1.2,0.028,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translate x*(-0.51-0.10)+y*(0.73-0.005)+z*2.8}
-// tuer links
 
 //innenwand rechts
 object{Board(0.695,0.4795,0.02,0.001) rotate z*90 rotate y*90 translate x*-0.4895+y*0.0+z*1.88}
@@ -412,6 +411,6 @@ object{Board(0.289,0.281,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translat
 object{Board(0.289,0.155,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translate x*-0.51+y*0.536+z*1.889}
 object{Board(0.289,0.155,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translate x*-0.51+y*0.694+z*1.889}
 
-//tueren
-object{Board(0.451,0.596,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translate x*-0.51+y*0.693+z*2.80}
-object{Board(0.451,0.596,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translate x*-0.51+y*0.693+z*2.343}
+// //tueren
+// object{Board(0.451,0.596,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translate x*-0.51+y*0.693+z*2.80}
+// object{Board(0.451,0.596,0.02,0.002) rotate x*90 rotate z*0 rotate y*90 translate x*-0.51+y*0.693+z*2.343}

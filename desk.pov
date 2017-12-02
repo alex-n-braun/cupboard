@@ -229,37 +229,6 @@ plane{z,-2
 // #declare clock_ = clock;
 #declare clock_=15;
 
-camera
-{
-// #1 von vorne animiert
-//   location  straightRotate(<-0.74, 0.12+0.11*clock, 0.>, 0.5*<Wdth, 0, Depth>, y*(130-3.5*clock))
-//   look_at   <0.6, 0.52+0.02*clock,0.4>
-// #2 registerschublade
-//   location  straightRotate(<0.15, 0.30+0.03*clock_,0.675>-<0.3, 0.0, 0.0>, <0.15, 0.45,0.675>, y*(-30+3.5*clock_))
-//   look_at   <0.15, 0.45,0.675>
-// von vorne 
-  location  <0.075, 0.5, 1.4>
-  look_at   <0.25, 0.3,0.6>
-//  location  <0.8, 1.82, 1.8>
-// von hinten
-//  location  <0.2,0.46,-0.5>
-//  look_at <0.6, 0.1, 0>
-// von der Seite rechts
-//     location  <-0.14, 1., Depth-Thk>
-//     look_at   <1., 1., Depth-Thk>
-// von oben, rechts vorne
-//     location <0, Height+0.5, Depth>
-//     look_at <0, 0, Depth>
-// von der Seite links
-//     location  <Wdth+0.14, 1., Depth-Thk>
-//     look_at   <1.-Wdth, 1., Depth-Thk>
-// von oben, links vorne
-//     location <Wdth, Height+0.5, Depth>
-//     look_at <Wdth, 0, Depth>
-// über schreibschublade
-//     location <0.25, 1, 0.8>
-//     look_at <0.2, 0.76, 0.7>
-}
 background{White*0.5}
 light_source{x*100 color White
     area_light 15*x,15*z, 10,10 jitter adaptive 1 orient
@@ -682,8 +651,6 @@ light_source{x*100 color White
     }
 #end
 
-
-
 #macro Desk(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, spacng, footHeight, footRad, deskTop, drawer1, drawer2, drawer3, bDoorLeft, bDoorRight, tDoorLeft, tDoorRight)
     #local drawerPull = function(pull) {0.5*(1-cos(pi * max(0, min((2*pull-0.25)*4/3, 2-2*pull))))};
     #local handlePull = function(pull) {min(1, max(0, min(pull, 0.5-pull))*8)*30};
@@ -704,11 +671,15 @@ light_source{x*100 color White
         object{
             difference{
                 object{
-                    Board(wdth-2*thkSide, height-thkTop*2-footHeight, 0.001, 0.0004)            
+                    Element(wdth-2*thkSide, height-thkTop*2-footHeight, 0.003, 0.0004)            
                     rotate x*90 translate <thkSide, height-thkTop, 0.003>
                 }
-                box{<0.04+thkSide,0.54,0>,<0.04+thkSide+0.1, 0.54+0.1, 0.006>}
+                box{<0.04+thkSide,0.54,0>,<0.04+thkSide+0.1, 0.54+0.1, 0.008>}
+                box{<wdth-thkSide-0.2,0.54,0>,<wdth-thkSide-0.2+0.14, 0.54+0.14, 0.008>}
             }
+            rotate -x*90
+            T_TableWood2()
+            rotate x*90
         }
         // Schreibschublade
         #local distBack = 0.07;
@@ -745,18 +716,28 @@ light_source{x*100 color White
         #local frontElementWidth = (wdth-2*spacng)/3;
         // Schubladenkasten...
         union{
+            // vertikal
             object{
-                Board(heightDesk - heightDeskFront - thkTop - footHeight + thk/2, depth-thk-0.003-0.01, thk, 0.0005) 
+                difference { // Aussparung fuer Kabel
+                    object{
+                        Element(heightDesk - heightDeskFront - thkTop - footHeight + thk/2, depth-thk-0.003-0.00-0.003, thk, 0.0005) 
+                    }
+                    cylinder{
+                        <0.08,-0.01,0>,<0.08, 0.05,0>,0.045
+                    }
+                }
+                T_TableWood2()
                 rotate z*90
             }
+            // Deckel
             object{
-                Board(frontElementWidth-(thkSide+thk-(0.5*(thk+spacng))), depth-thk-0.003-0.01, thk, 0.0005) 
+                Board(frontElementWidth-(thkSide+thk-(0.5*(thk+spacng))), depth-thk-0.003-0.00-0.003, thk, 0.0005) 
                 translate <-(frontElementWidth-(thkSide+thk-(0.5*(thk+spacng)))+thk),heightDesk - heightDeskFront - thkTop - footHeight - thk/2,0>
             }
-            translate <frontElementWidth+0.5*(thk+spacng),footHeight+thkTop,0.003+0.01>
+            translate <frontElementWidth+0.5*(thk+spacng),footHeight+thkTop,0.003+0.00+0.003>
             #warning concat("inner drawer box with: ", str(frontElementWidth-(thkSide+thk-0.5*(thk+spacng)),5,4))
         }
-        // 3 Shubladen
+        // 3 Schubladen
         #local depthDrawers = depth-0.003-0.01;
 //         object{
 //             union{
@@ -890,4 +871,3 @@ light_source{x*100 color White
 //object{DeskInst1(min(0.5, 0.25*(clock-10)),0,0,min(0.5, 0.25*(clock-11)),min(0.5, 0.5*(clock-2)),min(0.5, 0.25*(clock-3)),min(0.5,0.25*(clock-7)),min(0.5, 0.25*(clock-8)))}
 // #2
 //object{DeskInst1(0.5,max(0.5,0.5+0.5*0.25*(clock_-9)),0.5,0,0.0,0.0,0.,0.)}
-object{DeskInst1(0,0,0,0,0.5,0.5,0,0)}
