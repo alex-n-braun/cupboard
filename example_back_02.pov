@@ -7,5 +7,5 @@ camera
  look_at <0.3, 0.4, 0>
 }
 
-object{DeskInst1(0,0,0,0,0.5,0.5,0,0)}
+object{DeskInst1(0,0.0,0.0,0.0,0.5,0.5,0,0)}
 
