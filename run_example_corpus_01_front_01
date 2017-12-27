@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+#povray desk.pov +Q11 +A +WT64
+povray example_corpus_01_front_01.pov +Q11 +A +WT64 +BS32 Initial_Frame=1 Final_Frame=1 Initial_Clock=1 Final_Clock=1
+#povray desk.pov +Q11 +A +AM2 +J +R9
+

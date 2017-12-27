@@ -11,6 +11,7 @@
 
 #include "display.pov"
 #include "fan.pov"
+#include "corpus_01.pov"
 
 #declare Random_1 = seed (1153);
 
@@ -166,43 +167,6 @@ plane{z,-2
                 pigment_map { [1 light_Wallpaper ] }
                 }
 }
-
-#declare m_width=1.2;
-#declare m_tot_depth=0.5;
-#declare m_joint=0.002;  // fugen
-
-#declare m_sides_thickness=0.02;  // dicke seitenwaende
-#declare m_front_thickness=0.02;  // dicke der frontplatten
-#declare m_back_dist=0.01;  // rueckseite: wieviel nimmt sie vom innenraum weg?
-
-#declare m_desk_height=0.76;  // hoehe der Oberflaeche der Ausziehschublade
-#declare m_desk_thickness=0.02; // dicke der schreibschublade
-#declare m_desk_fittings=0.01;  // beschlaege
-#declare m_desk_dist=0.005;  // abstand oben
-#declare m_desk_frontheight=0.024; // hoehe schubladenfront
-#declare m_desk_boardwidth=m_width-2*(m_sides_thickness+m_desk_fittings);
-#declare m_desk_boarddepth=m_tot_depth-m_front_thickness-m_back_dist-0.1;  // platte ist verkuerzt wg. kabelschacht
-
-
-// ----------------------------------------
-// Scene
-// ----------------------------------------
-
-
-#declare Height = 1.30;
-#declare Wdth = 1.255;
-#declare Depth = 0.49;
-#declare ThkTop = 0.03;
-#declare EdgeTop = 0.002;
-#declare ThkSide = 0.04;
-#declare ThkDesk = 0.03;
-#declare HeightDesk = 0.76;
-#declare HeightDeskFront = 0.08;
-#declare Thk = 0.02;
-#declare FootHeight = 0.0625;
-#declare FootRad = 0.025;
-#declare Spacng = 0.002;
-
 
 #macro straightRotate(vec, dir1, dir2)
     dir1+vrotate(vec-dir1, dir2)
@@ -431,31 +395,6 @@ light_source{x*100 color White
         translate z*depth
     }
 #end
-#macro DeskInside(height, wdth, depth, thkTop, edgeTop, thkSide, heightDeskFront, thkDesk, thk, footHeight, footRad)
-    object{
-        difference{
-            object{
-                Element(wdth-2*thkSide, depth-thk, thkDesk, 0.0005)
-            }
-            box{
-                <wdth-2*thkSide-0.07,-0.01,0.04>,
-                <wdth-2*thkSide-0.07-0.1,thkDesk+0.01,0.04+0.04>
-            }
-            cylinder{
-                <wdth-2*thkSide-0.07,-0.01,0.04+0.02>,
-                <wdth-2*thkSide-0.07,thkDesk+0.01,0.04+0.02>,
-                0.02
-            }
-            cylinder{
-                <wdth-2*thkSide-0.07-0.1,-0.01,0.04+0.02>,
-                <wdth-2*thkSide-0.07-0.1,thkDesk+0.01,0.04+0.02>,
-                0.02
-            }
-        }
-        T_TableWood2()
-        translate <thkSide,0,0>
-    }
-#end
 #macro BoxInside(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, footHeight, footRad)
     union{
         object{
@@ -531,23 +470,6 @@ light_source{x*100 color White
         }
     #end
 #end
-// #macro FlapDoorOpn(wdth, thk, ornt, opn)
-//     transform{
-//         #if (ornt)
-//             translate -(x-z)*0.5*thk
-//             rotate y*opn
-//             #local shift = vdot(vrotate((x+z)*(0.5*thk), -opn*y), z)-0.5*thk;
-//             translate (x-z)*(0.5*thk)+(x+z)*shift
-//             translate vrotate(<wdth, 0, 0>, -y*opn)-x*wdth
-// //             translate z*thk
-// //             rotate y*opn
-// //             translate -z*thk
-// //             #local shift = vdot(vrotate((x+z)*(0.5*thk), -opn*y), z)-0.5*thk;
-// //             translate (x+z)*shift+vrotate(<wdth-thk, 0, 0>, -y*opn)-x*(wdth-thk)
-//         #else
-//         #end
-//     }
-// #end
 #macro Door(height, wdth, thk, edgeRad)
     object{
         Board(wdth, height, thk, edgeRad)
@@ -599,36 +521,11 @@ light_source{x*100 color White
     }
 #end
 
-#macro Desk(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, spacng, footHeight, footRad, deskTop, drawer1, drawer2, drawer3, bDoorLeft, bDoorRight, tDoorLeft, tDoorRight)
+#macro Desk01(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, spacng, footHeight, footRad, deskTop, drawer1, drawer2, drawer3, bDoorLeft, bDoorRight, tDoorLeft, tDoorRight)
     #local drawerPull = function(pull) {0.5*(1-cos(pi * max(0, min((2*pull-0.25)*4/3, 2-2*pull))))};
     #local handlePull = function(pull) {min(1, max(0, min(pull, 0.5-pull))*8)*30};
     union{
-        // Deckel und Fussplatte
-        object{Board(wdth, depth, thkTop, edgeTop) translate y*footHeight}
-        object{Board(wdth, depth, thkTop, edgeTop) translate y*(height-thkTop)}
-        // 4 Fuesse
-        object{Foot(footRad, footHeight) translate <footRad+0.02, 0, footRad+0.02>}
-        object{Foot(footRad, footHeight) translate <footRad+0.02, 0, depth-footRad-0.02>}
-        object{Foot(footRad, footHeight) translate <wdth-footRad-0.02, 0, footRad+0.02>}
-        object{Foot(footRad, footHeight) translate <wdth-footRad-0.02, 0, depth-footRad-0.02>}
-        // 2 seitenwaende
-        #local Sides=object{Board(height-thkTop*2-footHeight, depth-thk-0.0001, thkSide, edgeTop)}
-        object{Sides rotate z*90 translate <thkSide, (footHeight+thkTop), 0>}
-        object{Sides rotate z*90 translate <wdth, (footHeight+thkTop), 0>}
-        // Rueckwand
-        object{
-            difference{
-                object{
-                    Element(wdth-2*thkSide, height-thkTop*2-footHeight, 0.003, 0.0004)            
-                    rotate x*90 translate <thkSide, height-thkTop, 0.003>
-                }
-                box{<0.04+thkSide,0.54,0>,<0.04+thkSide+0.1, 0.54+0.1, 0.008>}
-                box{<wdth-thkSide-0.2,0.54,0>,<wdth-thkSide-0.2+0.12, 0.54+0.12, 0.008>}
-            }
-            rotate -x*90
-            T_TableWood2()
-            rotate x*90
-        }
+        object{Corpus01(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, footHeight, footRad)}
         // Ventillator
         object{
             AnimateFan(120, 20, 1, clock)
@@ -654,8 +551,6 @@ light_source{x*100 color White
                     translate z*deskTopPull*(depthDeskTop-thk)
             }
         }
-        // oberhalb...
-        object{DeskInside(height, wdth, depth, thkTop, edgeTop, thkSide, heightDeskFront, thkDesk, thk, footHeight, footRad) translate (heightDesk+0.01)*y}
         // Bildschirm
         object{
             object{
@@ -782,33 +677,3 @@ light_source{x*100 color White
         }
     }
 #end
-
-#macro DeskInst1(deskTop, drawer1, drawer2, drawer3, bDoorLeft, bDoorRight, tDoorLeft, tDoorRight)
-    object{
-        Desk(Height, 
-             Wdth, 
-             Depth, 
-             ThkTop, 
-             EdgeTop, 
-             ThkSide, 
-             HeightDesk, 
-             HeightDeskFront, 
-             ThkDesk, 
-             Thk, 
-             Spacng, 
-             FootHeight, 
-             FootRad, 
-             deskTop, 
-             drawer1, 
-             drawer2, 
-             drawer3, 
-             bDoorLeft, 
-             bDoorRight, 
-             tDoorLeft, 
-             tDoorRight)
-    }
-#end
-// #1
-//object{DeskInst1(min(0.5, 0.25*(clock-10)),0,0,min(0.5, 0.25*(clock-11)),min(0.5, 0.5*(clock-2)),min(0.5, 0.25*(clock-3)),min(0.5,0.25*(clock-7)),min(0.5, 0.25*(clock-8)))}
-// #2
-//object{DeskInst1(0.5,max(0.5,0.5+0.5*0.25*(clock_-9)),0.5,0,0.0,0.0,0.,0.)}
