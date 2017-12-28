@@ -1,10 +1,11 @@
+#include "scene_standard.pov"
 #include "desk_01.pov" 
 #include "dimensions_01.pov"
 
 camera
 {
   location  <0.175, 1.0, 2.1>
-  look_at   <0.35, 0.7,0.6>
+  look_at   <0.55, 0.8,0.6>
 }
 
 #macro Desk01Inst1(deskTop, drawer1, drawer2, drawer3, bDoorLeft, bDoorRight, tDoorLeft, tDoorRight)

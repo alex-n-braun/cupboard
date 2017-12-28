@@ -1,6 +1,6 @@
 
 
-#declare Height = 1.30;
+#declare Height = 1.5;
 #declare Wdth = 1.255;
 #declare Depth = 0.49;
 #declare ThkTop = 0.03;
