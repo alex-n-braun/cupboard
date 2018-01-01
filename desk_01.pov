@@ -29,7 +29,6 @@
   }
 }
 
-
 #declare paper8 = object {
   box { <0,0,0,> <0.075, 0.00008, 0.105>  } 
   texture { 
@@ -38,8 +37,6 @@
         finish { ambient 0.4 diffuse 0.6 }
   }
 }
-
-
 
 #macro Foot(rad, height)
     cylinder {
