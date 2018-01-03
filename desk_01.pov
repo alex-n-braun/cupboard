@@ -356,9 +356,13 @@
 #macro Desk01(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, spacng, footHeight, footRad, deskTop, drawer1, drawer2, drawer3, bDoorLeft, bDoorRight, tDoorLeft, tDoorRight)
     #local drawerPull = function(pull) {0.5*(1-cos(pi * max(0, min((2*pull-0.25)*4/3, 2-2*pull))))};
     #local handlePull = function(pull) {min(1, max(0, min(pull, 0.5-pull))*8)*30};
+    // Breite der Frontelemente (vgl. Corpus01)
+    #local frontElementWidth = (wdth-2*spacng)/3;
+    // horz. Positionierung des Schubladenkasten (vgl. Corpus01)
+    #local drawerBoxHorzPos = frontElementWidth+0.5*(thk+spacng);
     union{
         // Korpus (corpus_01.pov)
-        object{Corpus01(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, footHeight, footRad)}
+        object{Corpus01(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, spacng, footHeight, footRad)}
         // Ventillator (fan.pov)
         object{
             AnimateFan(120, 20, 1, clock)
@@ -391,31 +395,6 @@
                 translate y*(heightDesk+0.01+thkDesk)
                 translate <0.25,0,0.2>
             }
-        }
-        // Breite der Frontelemente
-        #local frontElementWidth = (wdth-2*spacng)/3;
-        // Schubladenkasten...
-        union{
-            // vertikal
-            object{
-                difference { // Aussparung fuer Kabel
-                    object{
-                        Element(heightDesk - heightDeskFront - thkTop - footHeight + thk/2, depth-thk-0.003-0.00-0.003, thk, 0.0005) 
-                    }
-                    cylinder{
-                        <0.08,-0.01,0>,<0.08, 0.05,0>,0.045
-                    }
-                }
-                TextureBoard()
-                rotate z*90
-            }
-            // Deckel
-            object{
-                Board(frontElementWidth-(thkSide+thk-(0.5*(thk+spacng))), depth-thk-0.003-0.00-0.003, thk, 0.0005) 
-                translate <-(frontElementWidth-(thkSide+thk-(0.5*(thk+spacng)))+thk),heightDesk - heightDeskFront - thkTop - footHeight - thk/2,0>
-            }
-            translate <frontElementWidth+0.5*(thk+spacng),footHeight+thkTop,0.003+0.00+0.003>
-            #warning concat("inner drawer box with: ", str(frontElementWidth-(thkSide+thk-0.5*(thk+spacng)),5,4))
         }
         // 3 Schubladen
         #local depthDrawers = depth-0.003-0.04;

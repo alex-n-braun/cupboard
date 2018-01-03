@@ -76,7 +76,7 @@
     }
 #end
 
-#macro Corpus01(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, footHeight, footRad)
+#macro Corpus01(height, wdth, depth, thkTop, edgeTop, thkSide, heightDesk, heightDeskFront, thkDesk, thk, spacng, footHeight, footRad)
     union{
         // Deckel und Fussplatte
         object{Board(wdth, depth, thkTop, edgeTop) translate y*footHeight}
@@ -112,5 +112,40 @@
         }
         // oberhalb schreibschublade
         object{DeskInside(height, wdth, depth, thkTop, edgeTop, thkSide, heightDeskFront, thkDesk, thk, footHeight, footRad) translate (heightDesk+0.01)*y}
+        // Breite der Frontelemente
+        #local frontElementWidth = (wdth-2*spacng)/3;
+        // horz. Positionierung des Schubladenkasten
+        #local drawerBoxHorzPos = frontElementWidth+0.5*(thk+spacng);
+        // Schubladenkasten...
+        union{
+            // vertikal
+            object{
+                difference { // Aussparung fuer Kabel
+                    object{
+                        Element(heightDesk - heightDeskFront - thkTop - footHeight + thk/2, depth-thk-0.003-0.00-0.003, thk, 0.0005) 
+                    }
+                    cylinder{
+                        <0.08,-0.01,0>,<0.08, 0.05,0>,0.045
+                    }
+                }
+                TextureBoard()
+                rotate z*90
+            }
+            // Deckel
+            object{
+                Board(frontElementWidth-(thkSide+thk-(0.5*(thk+spacng))), depth-thk-0.003-0.00-0.003, thk, 0.0005) 
+                translate <-(frontElementWidth-(thkSide+thk-(0.5*(thk+spacng)))+thk),heightDesk - heightDeskFront - thkTop - footHeight - thk/2,0>
+            }
+            translate <drawerBoxHorzPos,footHeight+thkTop,0.003+0.00+0.003>
+            #warning concat("inner drawer box with: ", str(frontElementWidth-(thkSide+thk-0.5*(thk+spacng)),5,4))
+        }
+        // Trennwand vor Technikraum
+        #local boardWidth = wdth - thkSide - drawerBoxHorzPos;
+        #local boardHeight = heightDesk - heightDeskFront - thkTop - footHeight;
+        object{
+            Board(boardWidth, boardHeight, thk, 0.0005)
+            rotate x*90
+            translate <drawerBoxHorzPos,boardHeight+footHeight+thkTop,0.3>
+        }
     }
 #end

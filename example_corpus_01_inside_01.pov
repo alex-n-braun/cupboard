@@ -7,5 +7,5 @@ camera
   look_at   <1, 0.7,0.05>
 }
 
-object{Corpus01(Height, Wdth, Depth, ThkTop, EdgeTop, ThkSide, HeightDesk, HeightDeskFront, ThkDesk, Thk, FootHeight, FootRad)}
+object{Corpus01(Height, Wdth, Depth, ThkTop, EdgeTop, ThkSide, HeightDesk, HeightDeskFront, ThkDesk, Thk, Spacng, FootHeight, FootRad)}
 

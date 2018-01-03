@@ -4,9 +4,9 @@
 
 camera
 {
-  location  <0.175, 1.0, 2.1>
+  location  <0.575, 1.0, 2.1>
   look_at   <0.55, 0.8,0.6>
 }
 
-object{Corpus01(Height, Wdth, Depth, ThkTop, EdgeTop, ThkSide, HeightDesk, HeightDeskFront, ThkDesk, Thk, FootHeight, FootRad)}
+object{Corpus01(Height, Wdth, Depth, ThkTop, EdgeTop, ThkSide, HeightDesk, HeightDeskFront, ThkDesk, Thk, Spacng, FootHeight, FootRad)}
 
