@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export outfldr=desk_01_scene_01
+
+mkdir $outfldr
+
+rm ./$outfldr/*.png
+
+#povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=450 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=16 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/
+
+rm ./$outfldr/output.mp4
+ffmpeg -framerate 30 -i ./$outfldr/ani_$outfldr%03d.png ./$outfldr/output.mp4
+

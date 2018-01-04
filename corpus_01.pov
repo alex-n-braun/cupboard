@@ -139,13 +139,5 @@
             translate <drawerBoxHorzPos,footHeight+thkTop,0.003+0.00+0.003>
             #warning concat("inner drawer box with: ", str(frontElementWidth-(thkSide+thk-0.5*(thk+spacng)),5,4))
         }
-        // Trennwand vor Technikraum
-        #local boardWidth = wdth - thkSide - drawerBoxHorzPos;
-        #local boardHeight = heightDesk - heightDeskFront - thkTop - footHeight;
-        object{
-            Board(boardWidth, boardHeight, thk, 0.0005)
-            rotate x*90
-            translate <drawerBoxHorzPos,boardHeight+footHeight+thkTop,0.3>
-        }
     }
 #end
