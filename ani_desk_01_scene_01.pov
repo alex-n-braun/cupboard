@@ -6,9 +6,20 @@
 
 camera
 {
-  location  <0.175, 1.0, 2.1>
-  look_at   <0.55, 0.8,0.6>
+// #1 von vorne animiert
+  location  straightRotate(<-0.74, 0.12+0.11*clock, 0.>, 0.5*<Wdth, 0, Depth>, y*(130-3.5*clock))
+  look_at   <0.6, 0.52+0.02*clock,0.4>
+//   location  <0.175, 1.0, 2.1>
+//   look_at   <0.55, 0.8,0.6>
 }
+
+// #1 von vorne animiert
+//   location  straightRotate(<-0.74, 0.12+0.11*clock, 0.>, 0.5*<Wdth, 0, Depth>, y*(130-3.5*clock))
+//   look_at   <0.6, 0.52+0.02*clock,0.4>
+// #2 registerschublade
+//   location  straightRotate(<0.15, 0.30+0.03*clock_,0.675>-<0.3, 0.0, 0.0>, <0.15, 0.45,0.675>, y*(-30+3.5*clock_))
+//   look_at   <0.15, 0.45,0.675>
+
 
 #macro Desk01Inst1(deskTop, drawer1, drawer2, drawer3, bDoorLeft, bDoorRight, tDoorLeft, tDoorRight)
     object{
