@@ -6,9 +6,31 @@ mkdir $outfldr
 
 rm ./$outfldr/*.png
 
-#povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=450 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/
-povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=16 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF0 +EF19 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF20 +EF39 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF40 +EF59 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF60 +EF79 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF80 +EF99 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF100 +EF119 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF120 +EF139 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF140 +EF159 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF160 +EF179 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF180 +EF199 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF200 +EF219 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF220 +EF239 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF240 +EF259 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF260 +EF279 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF280 +EF299 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF300 +EF319 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF320 +EF339 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF340 +EF359 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF360 +EF379 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF380 +EF399 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF400 +EF419 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT1 Initial_Frame=0 Final_Frame=450 +SF420 +EF450 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ 
 
-rm ./$outfldr/output.mp4
-ffmpeg -framerate 30 -i ./$outfldr/ani_$outfldr%03d.png ./$outfldr/output.mp4
+#povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=16 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/
+
+#rm ./$outfldr/output.mp4
+#ffmpeg -framerate 30 -i ./$outfldr/ani_$outfldr%03d.png ./$outfldr/output.mp4
 
