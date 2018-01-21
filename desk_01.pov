@@ -487,13 +487,16 @@
             texture { pigment { color rgb 0.1*<1,1,1> }}
             translate <wdth-0.2-0.6, footHeight+thkTop, 0.01>
         }
-            // Trennwand vor Technikraum
-        #local boardWidth = wdth - thkSide - drawerBoxHorzPos;
-        #local boardHeight = heightDesk - heightDeskFront - thkTop - footHeight;
-        object{
-            Board(boardWidth, boardHeight, thk, 0.0005)
-            rotate x*90
-            translate <drawerBoxHorzPos,boardHeight+footHeight+thkTop,0.3>
-        }
+//             Trennwand vor Technikraum
+//         #local boardWidth = wdth - thkSide - drawerBoxHorzPos;
+//         #local boardHeight = heightDesk - heightDeskFront - thkTop - footHeight-0.07;
+//         object{
+//             Board(boardWidth, boardHeight, thk, 0.0005)
+//             rotate x*90
+//             translate -x*boardWidth
+//             rotate -y*35
+//             translate x*boardWidth
+//             translate <drawerBoxHorzPos,boardHeight+footHeight+thkTop,0.3+0.6>
+//         }
 }
 #end
