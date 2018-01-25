@@ -391,7 +391,7 @@
         // Bildschirm
         object{
             object{
-                Display(42, 16/9, 0.14,-9)
+                Display(32, 16/9, 0.06,-9)
                 translate y*(heightDesk+0.01+thkDesk)
                 translate <0.25,0,0.2>
             }

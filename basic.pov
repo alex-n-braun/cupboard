@@ -1,5 +1,5 @@
-#macro straightRotate(vec, dir1, dir2)
-    dir1+vrotate(vec-dir1, dir2)
+#macro straightRotate(vec, origin, rotvec)
+    origin+vrotate(vec-origin, rotvec)
 #end
 
 #macro Element(lngth, wdth, thk, edge) 

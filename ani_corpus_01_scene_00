@@ -1,0 +1,20 @@
+#!/bin/bash
+
+export outfldr=corpus_01_scene_00
+
+mkdir $outfldr
+
+rm ./$outfldr/*.png
+
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT4 Initial_Frame=0 Final_Frame=450 +SF0 +EF79 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT4 Initial_Frame=0 Final_Frame=450 +SF80 +EF159 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT4 Initial_Frame=0 Final_Frame=450 +SF160 +EF239 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT4 Initial_Frame=0 Final_Frame=450 +SF240 +EF319 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT4 Initial_Frame=0 Final_Frame=450 +SF320 +EF399 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT4 Initial_Frame=0 Final_Frame=450 +SF400 +EF450 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/ &
+
+#povray ani_$outfldr.pov +Q11 +A +HR +RVP +WT64 Initial_Frame=1 Final_Frame=16 Initial_Clock=0 Final_Clock=15 Output_File_Name=./$outfldr/
+
+#rm ./$outfldr/output.mp4
+#ffmpeg -framerate 30 -i ./$outfldr/ani_$outfldr%03d.png ./$outfldr/output.mp4
+
